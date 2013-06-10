@@ -1,5 +1,70 @@
 % if renderings:
 % for rendering in renderings:
+<style>
+#pDebug .source span { font-family: monospace }
+#pDebug .source span.hll { background-color: #ffffcc }
+#pDebug .source span.c { color: #408080; font-style: italic } /* Comment */
+#pDebug .source span.err { border: 1px solid #FF0000 } /* Error */
+#pDebug .source span.k { color: #008000; font-weight: bold } /* Keyword */
+#pDebug .source span.p { color: #000000; font-weight: bold   } /* Param */
+#pDebug .source span.o { color: #666666 } /* Operator */
+#pDebug .source span.cm { color: #408080; font-style: italic } /* Comment.Multiline */
+#pDebug .source span.cp { color: #BC7A00 } /* Comment.Preproc */
+#pDebug .source span.c1 { color: #408080; font-style: italic } /* Comment.Single */
+#pDebug .source span.cs { color: #408080; font-style: italic } /* Comment.Special */
+#pDebug .source span.gd { color: #A00000 } /* Generic.Deleted */
+#pDebug .source span.ge { font-style: italic } /* Generic.Emph */
+#pDebug .source span.gr { color: #FF0000 } /* Generic.Error */
+#pDebug .source span.gh { color: #000080; font-weight: bold } /* Generic.Heading */
+#pDebug .source span.gi { color: #00A000 } /* Generic.Inserted */
+#pDebug .source span.go { color: #888888 } /* Generic.Output */
+#pDebug .source span.gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+#pDebug .source span.gs { font-weight: bold } /* Generic.Strong */
+#pDebug .source span.gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+#pDebug .source span.gt { color: #0044DD } /* Generic.Traceback */
+#pDebug .source span.kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+#pDebug .source span.kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+#pDebug .source span.kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+#pDebug .source span.kp { color: #008000 } /* Keyword.Pseudo */
+#pDebug .source span.kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+#pDebug .source span.kt { color: #B00040 } /* Keyword.Type */
+#pDebug .source span.m { color: #666666 } /* Literal.Number */
+#pDebug .source span.s { color: #BA2121 } /* Literal.String */
+#pDebug .source span.na { color: #7D9029 } /* Name.Attribute */
+#pDebug .source span.nb { color: #008000 } /* Name.Builtin */
+#pDebug .source span.nc { color: #0000FF; font-weight: bold } /* Name.Class */
+#pDebug .source span.no { color: #880000 } /* Name.Constant */
+#pDebug .source span.nd { color: #AA22FF } /* Name.Decorator */
+#pDebug .source span.ni { color: #999999; font-weight: bold } /* Name.Entity */
+#pDebug .source span.ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+#pDebug .source span.nf { color: #0000FF } /* Name.Function */
+#pDebug .source span.nl { color: #A0A000 } /* Name.Label */
+#pDebug .source span.nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+#pDebug .source span.nt { color: #008000; font-weight: bold } /* Name.Tag */
+#pDebug .source span.nv { color: #19177C } /* Name.Variable */
+#pDebug .source span.ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+#pDebug .source span.w { color: #bbbbbb } /* Text.Whitespace */
+#pDebug .source span.mf { color: #666666 } /* Literal.Number.Float */
+#pDebug .source span.mh { color: #666666 } /* Literal.Number.Hex */
+#pDebug .source span.mi { color: #3333BB; font-weight: bold } /* Literal.Number.Integer */
+#pDebug .source span.mo { color: #666666 } /* Literal.Number.Oct */
+#pDebug .source span.sb { color: #BA2121 } /* Literal.String.Backtick */
+#pDebug .source span.sc { color: #BA2121 } /* Literal.String.Char */
+#pDebug .source span.sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+#pDebug .source span.s2 { color: #BA2121 } /* Literal.String.Double */
+#pDebug .source span.se { color: #666666 } /* Literal.String.Escape */
+#pDebug .source span.sh { color: #BA2121 } /* Literal.String.Heredoc */
+#pDebug .source span.si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+#pDebug .source span.sx { color: #008000 } /* Literal.String.Other */
+#pDebug .source span.sr { color: #BB6688 } /* Literal.String.Regex */
+#pDebug .source span.s1 { color: #BA2121 } /* Literal.String.Single */
+#pDebug .source span.ss { color: #19177C } /* Literal.String.Symbol */
+#pDebug .source span.bp { color: #008000; font-weight: bold } /* Name.Builtin.Pseudo */
+#pDebug .source span.vc { color: #19177C } /* Name.Variable.Class */
+#pDebug .source span.vg { color: #19177C } /* Name.Variable.Global */
+#pDebug .source span.vi { color: #19177C } /* Name.Variable.Instance */
+#pDebug .source span.il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
 <table>
 	<thead>
 		<tr>
@@ -18,7 +83,7 @@
 	</thead>
 	<tbody>	
 		<tr class="pDebugOdd">
-			<td colspan="2">${rendering['val']|h}</td>
+			<td colspan="2">${rendering['val']|n}</td>
 		</tr>
 	</tbody>
 	<thead>
