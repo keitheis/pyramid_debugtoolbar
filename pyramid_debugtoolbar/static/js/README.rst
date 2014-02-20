@@ -7,3 +7,4 @@ must be re-patched.
 
 - require.js
 - jquery-1.7.2.min.js
+- highlight.pack.js

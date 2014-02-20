@@ -1,8 +1,8 @@
 /* Debug Toolbar CSS Reset, adapted from Eric Meyer's CSS Reset */
 #pDebug {color:#000;background:#FFF;}
-#pDebug, #pDebug div, #pDebug span, #pDebug applet, #pDebug object, #pDebug iframe,
+#pDebug, #pDebug div, #pDebug applet, #pDebug object, #pDebug iframe,
 #pDebug h1, #pDebug h2, #pDebug h3, #pDebug h4, #pDebug h5, #pDebug h6, #pDebug p, #pDebug blockquote, #pDebug pre,
-#pDebug a, #pDebug abbr, #pDebug acronym, #pDebug address, #pDebug big, #pDebug cite, #pDebug code,
+#pDebug a, #pDebug abbr, #pDebug acronym, #pDebug address, #pDebug big, #pDebug cite,
 #pDebug del, #pDebug dfn, #pDebug em, #pDebug font, #pDebug img, #pDebug ins, #pDebug kbd, #pDebug q, #pDebug s, #pDebug samp,
 #pDebug small, #pDebug strike, #pDebug strong, #pDebug sub, #pDebug sup, #pDebug tt, #pDebug var,
 #pDebug b, #pDebug u, #pDebug i, #pDebug center,
@@ -16,6 +16,18 @@
 	font-size:12px;
 	line-height:1.5em;
 	color:#000;
+	vertical-align:baseline;
+	background:transparent;
+	font-family:sans-serif;
+	text-align:left;
+}
+#pDebug span, #pDebug code {
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	font-size:12px;
+	line-height:1.5em;
 	vertical-align:baseline;
 	background:transparent;
 	font-family:sans-serif;

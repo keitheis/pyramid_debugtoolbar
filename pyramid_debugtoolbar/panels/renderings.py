@@ -1,25 +1,9 @@
 from pprint import pformat
 
-#from pygments import highlight
-#from pygments.lexers import get_lexer_by_name
-#from pygments.formatters import HtmlFormatter
-
 from pyramid_debugtoolbar.panels import DebugPanel
 from pyramid_debugtoolbar.utils import dictrepr
 
 _ = lambda x: x
-
-
-#class CodeHtmlFormatter(HtmlFormatter):
-    #def wrap(self, source, outfile):
-        #return self._wrap_code(source)
-
-    #def _wrap_code(self, source):
-        #for i, t in source:
-            #if t.startswith("u'"):
-                #t2 = t[2:-1]
-                #t = t2.decode('unicode-escape')
-            #yield i, t
 
 
 class RenderingsDebugPanel(DebugPanel):

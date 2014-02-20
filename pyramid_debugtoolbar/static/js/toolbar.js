@@ -1,6 +1,7 @@
 pyramid_debugtoolbar_require.config({
   paths: {
     "jquery": "jquery-1.7.2.min",
+    "highlight": "highlight.pack",
   }
 });
 
@@ -13,13 +14,16 @@ var firstAvailCol;if(typeof(matrix[rowIndex])=="undefined"){matrix[rowIndex]=[];
 
 pyramid_debugtoolbar_require([
   "jquery",
-  "tablesorter"], function($, tablesorter) {
+  "tablesorter",
+  "highlight",
+  ], function($, tablesorter) {
 
   $(function() {
     // cookie
     $.cookie = function(name, value, options) { if (typeof value != 'undefined') { options = options || {}; if (value === null) { value = ''; options.expires = -1; } var expires = ''; if (options.expires && (typeof options.expires == 'number' || options.expires.toUTCString)) { var date; if (typeof options.expires == 'number') { date = new Date(); date.setTime(date.getTime() + (options.expires * 24 * 60 * 60 * 1000)); } else { date = options.expires; } expires = '; expires=' + date.toUTCString(); } var path = options.path ? '; path=' + (options.path) : ''; var domain = options.domain ? '; domain=' + (options.domain) : ''; var secure = options.secure ? '; secure' : ''; document.cookie = [name, '=', encodeURIComponent(value), expires, path, domain, secure].join(''); } else { var cookieValue = null; if (document.cookie && document.cookie != '') { var cookies = document.cookie.split(';'); for (var i = 0; i < cookies.length; i++) { var cookie = $.trim(cookies[i]); if (cookie.substring(0, name.length + 1) == (name + '=')) { cookieValue = decodeURIComponent(cookie.substring(name.length + 1)); break; } } } return cookieValue; } };
     //
     $('head').append('<link rel="stylesheet" href="'+DEBUG_TOOLBAR_STATIC_PATH+'css/toolbar.css?'+ Math.random() +'" type="text/css" />');
+    $('head').append('<link rel="stylesheet" href="'+DEBUG_TOOLBAR_STATIC_PATH+'css/highlight_style_github.css?'+ Math.random() +'" type="text/css" />');
     var COOKIE_NAME = 'pdtb';
     var COOKIE_NAME_ACTIVE = COOKIE_NAME +'_active';
     var pdtb = {
@@ -43,6 +47,9 @@ pyramid_debugtoolbar_require([
             current.show();
             $('#pDebugToolbar li').removeClass('active');
             $(this).parent().addClass('active');
+            if (this.className.indexOf("TemplatePanel") != -1) {
+              hljs.initHighlighting();
+            }
           }
           return false;
         });
