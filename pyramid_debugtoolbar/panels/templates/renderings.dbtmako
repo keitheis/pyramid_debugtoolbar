@@ -1,5 +1,4 @@
 % if renderings:
-% for rendering in renderings:
 <style>
 #pDebug .source span { font-family: monospace }
 #pDebug .source span.hll { background-color: #ffffcc }
@@ -65,7 +64,8 @@
 #pDebug .source span.vi { color: #19177C } /* Name.Variable.Instance */
 #pDebug .source span.il { color: #666666 } /* Literal.Number.Integer.Long */
 </style>
-<table>
+% for rendering in renderings:
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<th colspan="2">Renderer Name</th>
