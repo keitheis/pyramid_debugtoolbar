@@ -83,7 +83,9 @@
 	</thead>
 	<tbody>	
 		<tr class="pDebugOdd">
-			<td colspan="2">${rendering['val']|n}</td>
+      <td colspan="2">
+        <pre><code>${rendering['val']|n}</code></pre>
+      </td>
 		</tr>
 	</tbody>
 	<thead>
