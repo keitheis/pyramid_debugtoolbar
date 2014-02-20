@@ -1,8 +1,8 @@
 from pprint import pformat
 
-from pygments import highlight
-from pygments.lexers import get_lexer_by_name
-from pygments.formatters import HtmlFormatter
+#from pygments import highlight
+#from pygments.lexers import get_lexer_by_name
+#from pygments.formatters import HtmlFormatter
 
 from pyramid_debugtoolbar.panels import DebugPanel
 from pyramid_debugtoolbar.utils import dictrepr
@@ -40,10 +40,6 @@ class RenderingsDebugPanel(DebugPanel):
         val = getattr(event, 'rendering_val', '<unknown>')
         try:
             val = pformat(val, width=160)
-            lexer = get_lexer_by_name("python")
-            formatter = HtmlFormatter(linenos=False, cssclass="source")
-            #formatter = CodeHtmlFormatter(linenos=False, cssclass="source")
-            val = highlight(val, lexer, formatter)
         except:
             # crazyass code raises an exception during __repr__ (formish)
             val = '<unknown>'
