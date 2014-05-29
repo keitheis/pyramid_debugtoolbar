@@ -1,4 +1,8 @@
 from pyramid.config import Configurator
+try:
+    from pyramid.security import NO_PERMISSION_REQUIRED
+except ImportError: # pragma: no cover
+    from pyramid.interfaces import NO_PERMISSION_REQUIRED
 from pyramid.settings import asbool
 from pyramid.wsgi import wsgiapp2
 from pyramid_debugtoolbar.utils import as_globals_list
@@ -33,15 +37,29 @@ default_global_panel_names = (
 
 default_hosts = ('127.0.0.1', '::1')
 
-default_settings = (
+default_settings = [
     ('enabled', asbool, 'true'),
     ('intercept_exc', as_display_debug_or_false, 'debug'),
     ('intercept_redirects', asbool, 'false'),
     ('panels', as_globals_list, default_panel_names),
+    ('extra_panels', as_globals_list, ()),
     ('global_panels', as_globals_list, default_global_panel_names),
+    ('extra_global_panels', as_globals_list, ()),
     ('hosts', as_list, default_hosts),
     ('exclude_prefixes', as_cr_separated_list, []),
-)
+]
+
+# We need to transform these from debugtoolbar. to pyramid. in our
+# make_application, but we want to allow people to set them in their
+# configurations as debugtoolbar.
+default_transform = [
+    ('debug_notfound', asbool, 'false'),
+    ('debug_routematch', asbool, 'false'),
+    ('reload_templates', asbool, 'false'),
+    ('reload_resources', asbool, 'false'),
+    ('reload_assets', asbool, 'false'),
+    ('prevent_http_cache', asbool, 'false'),
+]
 
 
 def parse_settings(settings):
@@ -51,8 +69,25 @@ def parse_settings(settings):
         name = '%s%s' % (SETTINGS_PREFIX, name)
         value = convert(settings.get(name, default))
         parsed[name] = value
+
+    # Extend the ones we are going to transform later ...
+    default_settings.extend(default_transform)
     for name, convert, default in default_settings:
         populate(name, convert, default)
+    return parsed
+
+def transform_settings(settings):
+    parsed = {}
+
+    def populate(name):
+        oname = '%s%s' % (SETTINGS_PREFIX, name)
+        nname = 'pyramid.%s' % name
+        value = settings.get(oname, False)
+        parsed[nname] = value
+
+    for name, _, _ in default_transform:
+        populate(name)
+
     return parsed
 
 def set_request_authorization_callback(request, callback):
@@ -68,8 +103,13 @@ def includeme(config):
     introspection = getattr(config, 'introspection', True)
     # dont register any introspectables for Pyramid 1.3a9+
     config.introspection = False
+
+    # Parse the settings
     settings = parse_settings(config.registry.settings)
+
+    # Update the current registry with the new settings
     config.registry.settings.update(settings)
+
     config.include('pyramid_mako')
     config.add_mako_renderer('.dbtmako', settings_prefix='dbtmako.')
     config.add_tween('pyramid_debugtoolbar.toolbar_tween_factory')
@@ -79,9 +119,14 @@ def includeme(config):
     config.add_directive('set_debugtoolbar_request_authorization',
                          set_request_authorization_callback)
 
+    # Do the transform and update the settings dictionary
+    settings.update(transform_settings(settings))
+
+    # Create the new application using the updated settings
     application = make_application(settings, config.registry)
     config.add_route('debugtoolbar', '/_debug_toolbar/*subpath')
-    config.add_view(wsgiapp2(application), route_name='debugtoolbar')
+    config.add_view(wsgiapp2(application), route_name='debugtoolbar',
+                    permission=NO_PERMISSION_REQUIRED)
     config.add_static_view('/_debug_toolbar/static', STATIC_PATH, static=True)
     config.introspection = introspection
 

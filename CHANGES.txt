@@ -1,7 +1,20 @@
-Unreleased
-----------
+2.1 (2014-05-22)
+----------------
 
-...
+- Add new "debugtoolbar." configuration settings that allow enabling or
+  disabling various Pyramid knobs in a users .ini file. This for instance
+  allows easy enabling/disabling of template reloading for the debugtoolbar.
+
+- Allow the toolbar to display always, even when the parent application
+  is using a default permission.
+  See https://github.com/Pylons/pyramid_debugtoolbar/issues/147
+
+- Stabilize and document the ``pyramid_debugtoolbar.panels.DebugPanel``
+  API to allow developers to create their own panels.
+
+- Add new ``debugtoolbar.extra_panels`` and
+  ``debugtoolbar.extra_global_panels`` configuration settings to make it
+  simpler to support custom panels without overwriting the default panels.
 
 2.0.2 (2014-02-13)
 ------------------

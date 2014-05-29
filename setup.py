@@ -40,7 +40,7 @@ docs_extras = [
     ]
 
 setup(name='pyramid_debugtoolbar',
-      version='2.0.3dev',
+      version='2.1',
       description=('A package which provides an interactive HTML debugger '
                    'for Pyramid application development'),
       long_description=README + '\n\n' + CHANGES,
@@ -52,6 +52,7 @@ setup(name='pyramid_debugtoolbar',
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.2",
         "Programming Language :: Python :: 3.3",
+        "Programming Language :: Python :: 3.4",
         "Framework :: Pyramid",
         "Topic :: Internet :: WWW/HTTP :: WSGI",
         "License :: Repoze Public License",
@@ -60,7 +61,7 @@ setup(name='pyramid_debugtoolbar',
       author=("Chris McDonough, Michael Merickel, Casey Duncan, "
               "Blaise Laflamme"),
       author_email="pylons-devel@googlegroups.com",
-      url="http://docs.pylonsproject.org",
+      url="http://docs.pylonsproject.org/projects/pyramid-debugtoolbar/en/latest/",
       license="BSD",
       packages=find_packages(),
       include_package_data=True,

@@ -2,6 +2,7 @@ from pprint import pformat
 
 from pyramid_debugtoolbar.panels import DebugPanel
 from pyramid_debugtoolbar.utils import dictrepr
+from pyramid_debugtoolbar.compat import text_
 
 _ = lambda x: x
 
@@ -14,6 +15,8 @@ class RenderingsDebugPanel(DebugPanel):
     name = 'Template'
     renderings = ()
     template = 'pyramid_debugtoolbar.panels:templates/renderings.dbtmako'
+    title = _('Renderers')
+    nav_title = title
 
     @property
     def has_content(self):
@@ -31,22 +34,17 @@ class RenderingsDebugPanel(DebugPanel):
         except:
             # crazyass code raises an exception during __repr__ (formish)
             val = '<unknown>'
-        self.renderings.append(dict(name=name,
-                                    system=dictrepr(event),
-                                    val=val))
+        self.renderings.append(
+            dict(name=name, system=dictrepr(event), val=text_(val, 'utf-8'))
+            )
+        # self.renderings.append(dict(name=name,
+                                    # system=dictrepr(event),
+                                    # val=val))
 
-    def nav_title(self):
-        return _('Renderers')
-
+    @property
     def nav_subtitle(self):
         num = len(self.renderings)
         return '%d' % (num)
-
-    def title(self):
-        return _('Renderers')
-
-    def url(self):
-        return ''
 
     def process_response(self, response):
         self.data = {'renderings': self.renderings}
